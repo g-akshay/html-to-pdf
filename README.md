@@ -1,4 +1,4 @@
-# ⚡ htmlconvert
+# ⚡ @gakshay/htmlconvert
 
 > Convert any HTML file or folder into a **PDF** or **EPUB** — from your terminal or a browser tab.
 
@@ -40,7 +40,7 @@ node --version
 **Install from npm:**
 
 ```bash
-npm install -g htmlconvert
+npm install -g @gakshay/htmlconvert
 ```
 
 That's it — the `html-convert` command is now available anywhere on your machine.
