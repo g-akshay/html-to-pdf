@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sample Document — html-convert test</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; padding: 40px; background: #f8fafc; color: #1e293b; }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: #0f172a; }
+    h2 { font-size: 1.5rem; margin: 2rem 0 1rem; color: #1e40af; border-bottom: 2px solid #bfdbfe; padding-bottom: 0.5rem; }
+    p { line-height: 1.7; margin-bottom: 1rem; color: #334155; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; }
+    .card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    canvas { border-radius: 8px; }
+    svg { display: block; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th { background: #1e40af; color: white; padding: 0.6rem 1rem; text-align: left; }
+    td { padding: 0.6rem 1rem; border-bottom: 1px solid #e2e8f0; }
+    tr:nth-child(even) td { background: #f1f5f9; }
+    .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.8rem; font-weight: 600; }
+    .badge-blue { background: #dbeafe; color: #1d4ed8; }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-orange { background: #ffedd5; color: #c2410c; }
+  </style>
+</head>
+<body>
+  <h1>Sample Conversion Document</h1>
+  <p>This document tests html-convert's ability to render <strong>canvas</strong>, <strong>SVG</strong>, <strong>charts</strong>, tables, and styled HTML.</p>
+
+  <h2>SVG Graphics</h2>
+  <div class="card">
+    <svg width="500" height="120" viewBox="0 0 500 120">
+      <!-- Gradient bar chart as SVG -->
+      <defs>
+        <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6366f1"/>
+          <stop offset="100%" stop-color="#8b5cf6"/>
+        </linearGradient>
+        <linearGradient id="grad2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#06b6d4"/>
+          <stop offset="100%" stop-color="#0891b2"/>
+        </linearGradient>
+        <linearGradient id="grad3" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#10b981"/>
+          <stop offset="100%" stop-color="#059669"/>
+        </linearGradient>
+      </defs>
+      <rect x="20"  y="20" width="60" height="80" rx="4" fill="url(#grad1)"/>
+      <rect x="100" y="40" width="60" height="60" rx="4" fill="url(#grad2)"/>
+      <rect x="180" y="10" width="60" height="90" rx="4" fill="url(#grad3)"/>
+      <rect x="260" y="30" width="60" height="70" rx="4" fill="url(#grad1)"/>
+      <rect x="340" y="50" width="60" height="50" rx="4" fill="url(#grad2)"/>
+      <rect x="420" y="15" width="60" height="85" rx="4" fill="url(#grad3)"/>
+      <text x="50" y="115" text-anchor="middle" font-size="11" fill="#64748b">Jan</text>
+      <text x="130" y="115" text-anchor="middle" font-size="11" fill="#64748b">Feb</text>
+      <text x="210" y="115" text-anchor="middle" font-size="11" fill="#64748b">Mar</text>
+      <text x="290" y="115" text-anchor="middle" font-size="11" fill="#64748b">Apr</text>
+      <text x="370" y="115" text-anchor="middle" font-size="11" fill="#64748b">May</text>
+      <text x="450" y="115" text-anchor="middle" font-size="11" fill="#64748b">Jun</text>
+    </svg>
+  </div>
+
+  <div class="grid">
+    <div>
+      <h2>Canvas Drawing</h2>
+      <div class="card">
+        <canvas id="myCanvas" width="300" height="200"></canvas>
+      </div>
+    </div>
+    <div>
+      <h2>SVG Pie Chart</h2>
+      <div class="card">
+        <svg width="200" height="200" viewBox="-1 -1 2 2">
+          <!-- Simple pie chart via path arcs -->
+          <path d="M0,0 L1,0 A1,1,0,0,1,0.309,0.951 Z" fill="#6366f1"/>
+          <path d="M0,0 L0.309,0.951 A1,1,0,0,1,-0.809,0.588 Z" fill="#06b6d4"/>
+          <path d="M0,0 L-0.809,0.588 A1,1,0,0,1,-0.809,-0.588 Z" fill="#10b981"/>
+          <path d="M0,0 L-0.809,-0.588 A1,1,0,0,1,1,0 Z" fill="#f59e0b"/>
+          <circle cx="0" cy="0" r="0.5" fill="white"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <h2>Data Table</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Product</th><th>Status</th><th>Revenue</th><th>Units</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Alpha Suite</td><td><span class="badge badge-green">Active</span></td><td>$84,200</td><td>1,240</td></tr>
+        <tr><td>Beta Platform</td><td><span class="badge badge-blue">Beta</span></td><td>$32,100</td><td>480</td></tr>
+        <tr><td>Gamma Tools</td><td><span class="badge badge-orange">Deprecated</span></td><td>$12,000</td><td>200</td></tr>
+        <tr><td>Delta Engine</td><td><span class="badge badge-green">Active</span></td><td>$150,400</td><td>3,100</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Typography & Content</h2>
+  <div class="card">
+    <p>This paragraph demonstrates that <strong>bold text</strong>, <em>italic text</em>, and <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace">inline code</code> all render correctly in both PDF and EPUB output.</p>
+    <p>The converter supports the full range of CSS properties including gradients, shadows, border-radius, flexbox, and CSS Grid — all captured accurately in the PDF output via Puppeteer's headless Chromium engine.</p>
+    <blockquote style="border-left:4px solid #6366f1;padding:1rem 1.5rem;background:#f8f7ff;margin:1rem 0;border-radius:0 8px 8px 0;color:#4338ca">
+      "The best tools disappear into the workflow."
+    </blockquote>
+  </div>
+
+  <script>
+    // Canvas drawing — rendered by Puppeteer before PDF capture
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Background
+    ctx.fillStyle = '#f8fafc';
+    ctx.fillRect(0, 0, 300, 200);
+
+    // Gradient circle
+    const grd = ctx.createRadialGradient(150, 100, 10, 150, 100, 80);
+    grd.addColorStop(0, '#a78bfa');
+    grd.addColorStop(1, '#6366f1');
+    ctx.fillStyle = grd;
+    ctx.beginPath();
+    ctx.arc(150, 100, 80, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Inner ring
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(150, 100, 55, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Label
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 18px system-ui';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Canvas ✓', 150, 100);
+
+    // Small dots
+    const dots = [[50, 50], [250, 50], [50, 150], [250, 150]];
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    for (const [x, y] of dots) {
+      ctx.beginPath();
+      ctx.arc(x, y, 6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  </script>
+</body>
+</html>

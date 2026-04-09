@@ -1,0 +1,6 @@
+node_modules/
+.cache/
+output/
+*.pdf
+*.epub
+.DS_Store

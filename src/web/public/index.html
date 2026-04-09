@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML → PDF / EPUB Converter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">html<span class="logo-arrow">→</span>convert</span>
+        </div>
+        <p class="tagline">Convert HTML files &amp; folders to PDF or EPUB instantly</p>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Drop Zone -->
+      <section class="drop-section">
+        <div class="drop-zone" id="dropZone">
+          <div class="drop-zone-content">
+            <div class="drop-icon" id="dropIcon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 8L32 44M32 8L20 20M32 8L44 20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 48H54V56H10V48Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2 class="drop-title">Drop HTML files or folders here</h2>
+            <p class="drop-subtitle">Supports canvas, SVG, charts, CSS, custom fonts, and all HTML tags</p>
+            <div class="drop-buttons">
+              <label class="btn btn-secondary" for="fileInput">
+                Choose File
+                <input type="file" id="fileInput" accept=".html,.htm" multiple hidden />
+              </label>
+              <label class="btn btn-secondary" for="folderInput">
+                Choose Folder
+                <input type="file" id="folderInput" webkitdirectory multiple hidden />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- File List -->
+        <div class="file-list" id="fileList" hidden>
+          <div class="file-list-header">
+            <span class="file-list-title" id="fileListTitle">0 files selected</span>
+            <button class="btn-link" id="clearFiles">Clear</button>
+          </div>
+          <ul id="fileListItems"></ul>
+        </div>
+      </section>
+
+      <!-- Options Panel -->
+      <section class="options-panel">
+        <h3 class="options-title">Conversion Options</h3>
+
+        <div class="options-grid">
+          <!-- Format -->
+          <div class="option-group">
+            <label class="option-label">Output Format</label>
+            <div class="format-buttons">
+              <button class="format-btn active" data-format="pdf">
+                <span class="format-badge pdf">PDF</span>
+                <span class="format-desc">Full rendering<br><small>canvas, charts, SVG</small></span>
+              </button>
+              <button class="format-btn" data-format="epub">
+                <span class="format-badge epub">EPUB</span>
+                <span class="format-desc">E-Book<br><small>text + images</small></span>
+              </button>
+              <button class="format-btn" data-format="both">
+                <span class="format-badge both">Both</span>
+                <span class="format-desc">PDF + EPUB<br><small>all formats</small></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Page Size (PDF) -->
+          <div class="option-group" id="pageSizeGroup">
+            <label class="option-label" for="pageFormat">Page Size</label>
+            <select class="option-select" id="pageFormat">
+              <option value="A4">A4 (297 × 210 mm)</option>
+              <option value="Letter">Letter (279 × 216 mm)</option>
+              <option value="Legal">Legal (356 × 216 mm)</option>
+              <option value="A3">A3 (420 × 297 mm)</option>
+            </select>
+          </div>
+
+          <!-- Title -->
+          <div class="option-group">
+            <label class="option-label" for="docTitle">Document Title</label>
+            <input type="text" class="option-input" id="docTitle" placeholder="Auto-detected from HTML" />
+          </div>
+
+          <!-- Author -->
+          <div class="option-group">
+            <label class="option-label" for="docAuthor">Author <span class="dim">(EPUB only)</span></label>
+            <input type="text" class="option-input" id="docAuthor" placeholder="Author name" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Convert Button -->
+      <div class="convert-action">
+        <button class="btn btn-primary" id="convertBtn" disabled>
+          <span class="btn-icon">⚡</span>
+          Convert
+        </button>
+      </div>
+
+      <!-- Progress -->
+      <section class="progress-section" id="progressSection" hidden>
+        <div class="progress-card">
+          <div class="progress-header">
+            <div class="progress-spinner"></div>
+            <span class="progress-label" id="progressLabel">Preparing conversion...</span>
+            <span class="progress-pct" id="progressPct">0%</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progressBarFill" style="width: 0%"></div>
+          </div>
+          <p class="progress-format" id="progressFormat"></p>
+        </div>
+      </section>
+
+      <!-- Results -->
+      <section class="results-section" id="resultsSection" hidden>
+        <div class="results-card">
+          <div class="results-icon">✓</div>
+          <h3 class="results-title">Conversion Complete!</h3>
+          <div class="results-files" id="resultsFiles"></div>
+          <button class="btn btn-secondary" id="convertAnother">Convert another file</button>
+        </div>
+      </section>
+
+      <!-- Error -->
+      <section class="error-section" id="errorSection" hidden>
+        <div class="error-card">
+          <div class="error-icon">✗</div>
+          <h3 class="error-title">Conversion Failed</h3>
+          <p class="error-message" id="errorMessage"></p>
+          <button class="btn btn-secondary" id="retryBtn">Try Again</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Supports <strong>Canvas</strong> · <strong>SVG</strong> · <strong>Charts</strong> · <strong>Web Fonts</strong> · <strong>CSS Animations</strong> · <strong>Custom CSS</strong></p>
+      <p class="footer-cli">Also available as a CLI: <code>html-convert convert ./my-page</code></p>
+    </footer>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
