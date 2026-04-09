@@ -1,4 +1,4 @@
-# ⚡ html-to-pdf
+# ⚡ htmlconvert
 
 > Convert any HTML file or folder into a **PDF** or **EPUB** — from your terminal or a browser tab.
 
@@ -37,16 +37,24 @@ You need **Node.js 20 or newer**. Check with:
 node --version
 ```
 
-Then clone and install:
+**Install from npm:**
 
 ```bash
-git clone <this-repo>
+npm install -g htmlconvert
+```
+
+That's it — the `html-convert` command is now available anywhere on your machine.
+
+<details>
+<summary>Or clone and run locally</summary>
+
+```bash
+git clone https://github.com/g-akshay/html-to-pdf.git
 cd html-to-pdf
 npm install
 npm link
 ```
-
-> `npm link` makes the `html-convert` command available anywhere on your machine.
+</details>
 
 ---
 

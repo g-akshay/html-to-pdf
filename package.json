@@ -1,11 +1,15 @@
 {
-  "name": "html-to-pdf",
-  "version": "1.0.0",
-  "description": "Convert HTML files/folders to PDF and EPUB with a beautiful CLI and web UI",
+  "name": "htmlconvert",
+  "version": "0.1.0",
+  "description": "Convert HTML files and folders to PDF and EPUB — CLI and web UI with full support for canvas, SVG, charts, and custom fonts",
   "type": "module",
   "bin": {
     "html-convert": "./bin/html-convert.js"
   },
+  "files": [
+    "bin",
+    "src"
+  ],
   "engines": {
     "node": ">=20.0.0"
   },
@@ -13,6 +17,28 @@
     "start": "node bin/html-convert.js",
     "serve": "node bin/html-convert.js serve"
   },
+  "keywords": [
+    "html",
+    "pdf",
+    "epub",
+    "html-to-pdf",
+    "html-to-epub",
+    "converter",
+    "puppeteer",
+    "cli",
+    "canvas",
+    "svg",
+    "charts"
+  ],
+  "homepage": "https://github.com/g-akshay/html-to-pdf#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g-akshay/html-to-pdf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/g-akshay/html-to-pdf/issues"
+  },
+  "license": "MIT",
   "dependencies": {
     "archiver": "^7.0.1",
     "boxen": "^8.0.1",

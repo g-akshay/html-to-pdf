@@ -1,0 +1,7 @@
+test/
+assets/
+.claude/
+*.png
+ARCHITECTURE.md
+CLAUDE.md
+.gitignore
