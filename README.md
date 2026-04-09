@@ -1,4 +1,4 @@
-# ⚡ html-convert
+# ⚡ html-to-pdf
 
 > Convert any HTML file or folder into a **PDF** or **EPUB** — from your terminal or a browser tab.
 
@@ -22,6 +22,7 @@ Handles canvas, SVG, charts, custom fonts, CSS animations, and anything a real b
   - [7. Change page size](#7-change-page-size)
   - [8. All options](#8-all-options)
 - [✅ What it supports](#-what-it-supports)
+- [🆚 Why not just use Ctrl+P?](#-why-not-just-use-ctrlp)
 - [🧪 Test it quickly](#-test-it-quickly)
 - [🗂️ Project layout](#️-project-layout)
 - [📦 Requirements](#-requirements)
@@ -183,6 +184,58 @@ html-convert convert <file-or-folder> [options]
 
 - **PDF** uses headless Chrome — renders exactly what a browser would show.
 - **EPUB** inlines all images and CSS so the file is fully self-contained.
+
+---
+
+## 🆚 Why not just use Ctrl+P?
+
+Browsers have a built-in print-to-PDF via Ctrl+P. This tool produces noticeably better results for several reasons:
+
+### 🎨 Backgrounds are stripped by default in Ctrl+P
+
+Browsers remove background colors, gradients, and background images unless the user manually ticks "Print backgrounds" in the print dialog — most people never do.
+
+This tool sets `printBackground: true` in Puppeteer, so every background color, gradient, card shadow, and chart fill is captured exactly as it appears on screen. This is usually the single biggest visual difference.
+
+### ⏱️ Ctrl+P fires immediately — this tool waits
+
+When you hit Ctrl+P, the browser captures whatever is rendered at that instant. If a chart animation is mid-draw, images are still loading, or a font hasn't finished fetching — that's what you get.
+
+This tool deliberately waits for:
+- All `<img>` elements to finish loading
+- A `requestAnimationFrame` tick to catch JS-driven renders
+- An extra pause for chart libraries (Chart.js, D3, etc.) to complete their draw cycle
+
+Canvas and chart content is fully rendered before the PDF is captured.
+
+### 🗑️ Ctrl+P adds browser chrome you didn't ask for
+
+The browser injects the page URL at the top and the date + page number at the bottom. There's no easy way to remove these without digging into browser-specific settings.
+
+This tool produces a clean page with no injected headers or footers unless you explicitly add them.
+
+### 📐 The viewport is always controlled
+
+When you print from a browser, it uses whatever window size you have open. A narrow window means a mobile layout in the PDF.
+
+This tool sets the viewport to **1280×900px** before loading the page, so it always renders in the full desktop layout regardless of your screen or window size.
+
+### 📦 Assets always load
+
+With Ctrl+P, if a font or image fails due to CORS, a slow network, or an ad blocker, it prints without it.
+
+This tool serves the entire folder through a local HTTP server so every asset — fonts, images, CSS — loads cleanly before the PDF is made.
+
+### At a glance
+
+| | Ctrl+P | html-to-pdf |
+|---|---|---|
+| Background colors | ❌ Stripped by default | ✅ Always included |
+| Waits for JS / charts | ❌ No | ✅ Yes |
+| Browser headers & footers | ❌ URL, date injected | ✅ Clean output |
+| Viewport | ❌ Whatever your window is | ✅ Fixed 1280px |
+| Canvas capture | ⚠️ Sometimes broken | ✅ Reliable |
+| Asset loading | ⚠️ Depends on network | ✅ Local server |
 
 ---
 
