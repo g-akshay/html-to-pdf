@@ -6,6 +6,26 @@ Handles canvas, SVG, charts, custom fonts, CSS, and anything a real browser can 
 
 ---
 
+## Table of Contents
+
+- [Install](#install)
+- [Use the CLI](#use-the-cli)
+  - [Simplest: just run it and answer the questions](#simplest-just-run-it-and-answer-the-questions)
+  - [Convert a single HTML file to PDF](#convert-a-single-html-file-to-pdf)
+  - [Convert to EPUB instead](#convert-to-epub-instead)
+  - [Convert to both PDF and EPUB at once](#convert-to-both-pdf-and-epub-at-once)
+  - [Convert a whole folder](#convert-a-whole-folder)
+  - [Choose where to save](#choose-where-to-save)
+  - [Change page size (PDF only)](#change-page-size-pdf-only)
+  - [Full options](#full-options)
+- [Use the Web UI](#use-the-web-ui)
+- [What it supports](#what-it-supports)
+- [Test it quickly](#test-it-quickly)
+- [Project layout](#project-layout)
+- [Requirements](#requirements)
+
+---
+
 ## Install
 
 You need **Node.js 18 or newer**. Check with:
