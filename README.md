@@ -4,6 +4,8 @@
 
 Handles canvas, SVG, charts, custom fonts, CSS animations, and anything a real browser can render.
 
+![html-convert terminal](assets/termianal.png)
+
 ---
 
 ## 📋 Table of Contents
@@ -28,7 +30,7 @@ Handles canvas, SVG, charts, custom fonts, CSS animations, and anything a real b
 
 ## 🚀 Install
 
-You need **Node.js 18 or newer**. Check with:
+You need **Node.js 20 or newer**. Check with:
 
 ```bash
 node --version
@@ -210,5 +212,5 @@ test/fixtures/sample/     Sample HTML for testing
 
 ## 📦 Requirements
 
-- **Node.js 18+**
+- **Node.js 20+**
 - Chromium downloads automatically via Puppeteer on first `npm install` (~170 MB)
